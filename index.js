@@ -7,12 +7,13 @@ let wasLive = false;
 
 async function checkKick() {
   try {
-    const res = await axios.get(`https://kick.com/api/v2/channels/$dacas1`);
+    // koristi promenljivu KICK_USER, ne $DacaS1
+    const res = await axios.get(`https://kick.com/api/v2/channels/${KICK_USER}`);
     const isLive = res.data.livestream !== null;
 
     if (isLive && !wasLive) {
       await axios.post(DISCORD_WEBHOOK, {
-        content: `🔴 LIVE SAM!\nhttps://kick.com/$dacas1`
+        content: `🔴 LIVE SAM!\nhttps://kick.com/${KICK_USER}`
       });
     }
 
